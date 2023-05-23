@@ -1,4 +1,4 @@
-class vehicule:
+class rules:
     def __init__(self, speed, teams, items, CPU, courses, race_count):
         self.speed = speed
         self.teams = teams

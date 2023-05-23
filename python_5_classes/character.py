@@ -10,7 +10,7 @@ class character:
         self.Handling = Handling
         self.Traction = Traction
 
-    def character_select(self):
+    def character_select(self, menu, user_character):
         choice = 0
         print("Choose your character :")
         while (1):
@@ -18,17 +18,28 @@ class character:
             print("c) [Create your own]")
             print("q) [Return to Menu]\n")
             choice = input("input -> ")
+            print("choice = ", choice)
             if choice == '1':
-                return("Mario", 7, 2, 6, 4, 2)
+                print("Waouh !")
+                user_character.attribute_to_class("Mario", 7, 2, 6, 4, 2)
+                break 
             elif choice =='2':
-                return("Luigi", 2, 7, 5, 5, 1)
+                print("Oh Yeah !")
+                user_character.attribute_to_class("Luigi", 2, 7, 5, 5, 1)
+                break
             elif choice =='3':
-                return("Peach", 6, 3, 4, 5, 3)
+                print("Sweet !")
+                user_character.attribute_to_class("Peach", 6, 3, 4, 5, 3)
+                break
             elif choice =='4':
-                return("Bowser", 10, 1, 10, 1, 1)
+                print("Showtime !")
+                user_character.attribute_to_class("Bowser", 10, 1, 10, 1, 1)
+                break
             elif choice == 'c':
+                user_character.custom_character(user_character)
                 break
             elif choice == 'q':
+                menu.input_choice = '1'
                 print("back to main menu")
                 break
             else:
@@ -42,24 +53,97 @@ class character:
             #         return("Peach", 6, 3, 4, 5, 3)
             #     case 4:
             #         return("Bowser", 10, 1, 10, 1, 1)
-
-    def custom_character():
+        
+    def custom_character(self, user_character):
+        points_to_spare = 20
+        name = input("Enter your name : ")
+        print("-> ", end='')
         print("You have 20 points to spare,")
-        print("You are allowed to spend 1 to 9 points in a stat")
+        print("You are allowed to spend 0 to 10 points in a stat")
         print("Weight Stat is it's own case, \tyou will be allowed to choose a number between 1 and 10")
-        print("How much point will you spend to the speed stat ?")
-        print("Point(s) spend -> ")
 
-        print("How much point will you spend to the Acceleration stat ?")
-        print("Point(s) spend -> ")
+        print("\nHow much point will you spend to the speed stat ?\t Points left :", points_to_spare)
+        while(1):
+            point_used = int(input("Point(s) to spend -> "))
+            if point_used <= 10 and point_used >= 0 and points_to_spare >= 0:
+                points_to_spare -= point_used
+                speed = point_used
+                break
+            else:
+                print("error, please input a number between 1 and 10")
+        print("Points left :", points_to_spare)
 
-        print("How much point will you choose to the speed stat ?")
-        print("Weight from 1 to 10 -> ")
+        print("\nHow much point will you spend to the Acceleration stat ?\t Points left :", points_to_spare)
+        while(2):
+            point_used = int(input("Point(s) to spend -> "))
+            if point_used <= 10 and point_used >= 0 and points_to_spare >= 0:
+                points_to_spare -= point_used
+                acceleration = point_used
+                break
+            else:
+                print("error, please input a number between 1 and 10")
+        print("Points left :", points_to_spare)
 
-        print("How much point will you spend to the Handling stat ?")
-        print("Point(s) spend -> ")
+        print("\nHow much point will you choose to the Weight stat ?")
+        while(3):
+            point_used = int(input("Weight from 1 to 10 -> "))
+            if point_used <= 10 and point_used >= 0:
+                weight = point_used
+                break
+            else:
+                print("error, please input a number between 1 and 10")
 
-        print("How much point will you spend to the Traction stat ?")
-        print("Point(s) spend -> ")
+        print("\nHow much point will you spend to the Handling stat ?\t Points left :", points_to_spare)
+        while(4):
+            point_used = int(input("Point(s) to spend -> "))
+            if point_used <= 10 and point_used >= 0 and points_to_spare >= 0:
+                points_to_spare -= point_used
+                handling = point_used
+                break
+            else:
+                print("error, please input a number between 1 and 10")
+                print("Points left :", points_to_spare)
+        print("Points left :", points_to_spare)
 
+        print("\nHow much point will you spend to the Traction stat ?\t Points left :", points_to_spare)
+        while(5):
+            point_used = int(input("Point(s) to spend -> "))
+            if point_used <= 10 and point_used >= 0 and points_to_spare >= 0:
+                points_to_spare -= point_used
+                traction = point_used
+                break
+            else:
+                print("error, please input a number between 1 and 10")
+                print("Points left :", points_to_spare)
+
+        print("Points left :", points_to_spare)
+
+        print("RECAP :")
+        print("name =", name)
+        print("speed =", speed)
+        print("acceleration =", acceleration)
+        print("weight =", weight)
+        print("handling =", handling)
+        print("traction =", traction)
+        
         print("Custom Character complete !")
+
+        user_character.attribute_to_class(name, speed, acceleration, weight, handling, traction)
+    
+    def attribute_to_class(self, name, speed, acceleration, weight, handling, traction):
+        self.name = name
+        self.Speed = speed
+        self.Acceleration = acceleration
+        self.Weight = weight
+        self.Handling = handling
+        self.Traction = traction
+
+    def print_character_stat(self):
+        print("Character Chosen :")
+        print("\tname =", self.name)
+        print("\tspeed =", self.Speed)
+        print("\tacceleration =", self.Acceleration)
+        print("\tweight =", self.Weight)
+        print("\thandling =", self.Handling)
+        print("\ttraction =", self.Traction)
+        print
