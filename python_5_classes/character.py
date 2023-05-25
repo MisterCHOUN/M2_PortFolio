@@ -13,6 +13,12 @@ class character:
     def character_select(self, menu, user_character):
         choice = 0
         print("Choose your character :")
+        list = [
+            ["Mario", 7, 2, 6, 4, 2],
+            ["Luigi", 2, 7, 5, 5, 1],
+            ["Peach", 6, 3, 4, 5, 3],
+            ["Bowser", 10, 1, 10, 1, 1]
+        ]
         while (1):
             print("1) Mario\t2) Luigi\t3) Peach\t4) Bowser")
             print("c) [Create your own]")
@@ -21,19 +27,23 @@ class character:
             print("choice = ", choice)
             if choice == '1':
                 print("Waouh !")
-                user_character.attribute_to_class("Mario", 7, 2, 6, 4, 2)
+                #user_character = list[1]
+                #user_character.attribute_to_class("Mario", 7, 2, 6, 4, 2)
+                user_character.attribute_to_class(list[0])
+                #print("user_character_name =", user_character.name)
+                #user_character.print_character_stat()
                 break 
             elif choice =='2':
                 print("Oh Yeah !")
-                user_character.attribute_to_class("Luigi", 2, 7, 5, 5, 1)
+                user_character.attribute_to_class(list[1])
                 break
             elif choice =='3':
                 print("Sweet !")
-                user_character.attribute_to_class("Peach", 6, 3, 4, 5, 3)
+                user_character.attribute_to_class(list[2])
                 break
             elif choice =='4':
                 print("Showtime !")
-                user_character.attribute_to_class("Bowser", 10, 1, 10, 1, 1)
+                user_character.attribute_to_class(list[3])
                 break
             elif choice == 'c':
                 user_character.custom_character(user_character)
@@ -130,13 +140,14 @@ class character:
 
         user_character.attribute_to_class(name, speed, acceleration, weight, handling, traction)
     
-    def attribute_to_class(self, name, speed, acceleration, weight, handling, traction):
-        self.name = name
-        self.Speed = speed
-        self.Acceleration = acceleration
-        self.Weight = weight
-        self.Handling = handling
-        self.Traction = traction
+    def attribute_to_class(self, list):
+        n = 0
+        self.name = list[0]
+        self.Speed = list[n+1]
+        self.Acceleration = list[n+2]
+        self.Weight = list[n+3]
+        self.Handling = list[n+4]
+        self.Traction = list[n+5]
 
     def print_character_stat(self):
         print("Character Chosen :")
