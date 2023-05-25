@@ -15,6 +15,7 @@ void print_fighter(FIGHTER f){
     printf("RES : %d\n", f.RES);
     for (int i = 0; i < nb_attacks; i++ ){
         printf("Skill number : %d\tType : %c\tPower : %d\n", f.skill_num[i], f.skill_type[i], f.skill_dmg[i]);
+        printf("Skill name : %s\n", f.skill_name[i]);
     }
     printf("\n");
 }
@@ -82,17 +83,17 @@ void fight(FIGHTER user, FIGHTER cpu, int turn){
     int input;
     int ko = 0;
     int dmg_dealt;
-    while(ko != 1){
+    while(ko == 0){
         if (turn == 1){
             printf("\t[Player turn !]\n");
             printf("Choose your action :");
             for(int nb = 0; nb < nb_attacks; nb++){
-                printf("%d) ", nb);
+                printf("%d) %s  ", nb, user.skill_name[nb]);
             }
             printf("\n-> ");
             scanf("%d", &input);
             if(input >=0 && input <= nb_attacks){
-                printf("%s use skill %d !\n", user.name, user.skill_num[input]);
+                printf("%s use %s !\n", user.name, user.skill_name[input]);
                 dmg_dealt = damage_formula(user, cpu, input);
                 printf("%s inflicts %d damage\n", user.name, dmg_dealt);
                 cpu.PV -= dmg_dealt;
@@ -112,7 +113,7 @@ void fight(FIGHTER user, FIGHTER cpu, int turn){
         if (turn == 2){
             printf("\t[CPU turn !]\n");
             input = rand()%nb_attacks;
-            printf("%s use skill %d !\n", cpu.name, cpu.skill_num[input]);
+            printf("%s use %s !\n", cpu.name, cpu.skill_name[input]);
             dmg_dealt = damage_formula(cpu, user, input);
             printf("%s inflicts %d damage\n", cpu.name, dmg_dealt);
             user.PV -= dmg_dealt;

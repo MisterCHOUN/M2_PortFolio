@@ -28,8 +28,8 @@ int main(void){
 
     //Roster[2];
     FIGHTER f[nb_fighter] = {
-        {"Maxime", 30, 8, 2, 6, 4, {1, 2}, {'P', 'M'}, {5, 5} },
-        {"Walid", 30, 3, 4, 7, 6, {1, 2}, {'P', 'M'}, {4, 6}}
+        {"Maxime", 30, 8, 2, 6, 4, {1, 2}, {"punch", "Burlp"}, {'P', 'M'}, {5, 5} },
+        {"Walid", 30, 3, 4, 7, 6, {1, 2}, {"punch", "kick"}, {'P', 'M'}, {4, 6}}
     };
     //Roster[]
     //FIGHTER f3 = {"Adrian", 10, 10, 0, 0};
@@ -49,7 +49,6 @@ int main(void){
             scanf("%d", &choice);
         if (choice >= 0 && choice < nb_fighter){
             print_user_choice(f[choice], choice);
-            
             break;
         }
         else{

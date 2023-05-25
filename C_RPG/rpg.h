@@ -13,6 +13,7 @@ typedef struct Fighter {
   int MAG;
   int RES;
   int skill_num[nb_attacks];
+  char skill_name[nb_attacks][20];
   char skill_type[nb_attacks];
   int skill_dmg[nb_attacks];
 } FIGHTER;
