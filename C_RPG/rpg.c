@@ -14,14 +14,24 @@ void print_fighter(FIGHTER f){
     printf("MAG : %d\n", f.MAG);
     printf("RES : %d\n", f.RES);
     for (int i = 0; i < nb_attacks; i++ ){
-        printf("Skill number : %d\tType : %c\tPower : %d\n", f.skill_num[i], f.skill_type[i], f.skill_dmg[i]);
-        printf("Skill name : %s\n", f.skill_name[i]);
+        printf("Skill name :%s\tType : %c\tPower : %d\n",  f.skill_name[i], f.skill_type[i], f.skill_dmg[i]);
     }
     printf("\n");
 }
 
 void print_user_choice(FIGHTER f, int choice){
     printf("You have chosen [%s]\n", f.name);
+}
+
+int accuracy_formula(FIGHTER A, int choice){
+    int success = 0;
+    int hit;
+    hit = rand()%100 + 1;
+    printf("Hit accuracy : %d ( must be under %d percent)\n", hit, A.accuracy[choice]);
+    if (hit <= A.accuracy[choice]){
+        success = 1;
+    }
+    return success;
 }
 
 int damage_formula(FIGHTER A, FIGHTER D, int choice){
@@ -33,6 +43,9 @@ int damage_formula(FIGHTER A, FIGHTER D, int choice){
         case 'M':
             damage_dealt = (A.MAG + A.skill_dmg[choice]) - D.RES;
             break;
+    }
+    if (damage_dealt < 0){
+        damage_dealt = 0;
     }
     return damage_dealt;
 }
@@ -83,6 +96,7 @@ void fight(FIGHTER user, FIGHTER cpu, int turn){
     int input;
     int ko = 0;
     int dmg_dealt;
+    int hit;
     while(ko == 0){
         if (turn == 1){
             printf("\t[Player turn !]\n");
@@ -94,9 +108,16 @@ void fight(FIGHTER user, FIGHTER cpu, int turn){
             scanf("%d", &input);
             if(input >=0 && input <= nb_attacks){
                 printf("%s use %s !\n", user.name, user.skill_name[input]);
-                dmg_dealt = damage_formula(user, cpu, input);
-                printf("%s inflicts %d damage\n", user.name, dmg_dealt);
-                cpu.PV -= dmg_dealt;
+                hit = accuracy_formula(user, input);
+                if(hit == 1){
+                    dmg_dealt = damage_formula(user, cpu, input);
+                    printf("%s inflicts %d damage\n", user.name, dmg_dealt);
+                    cpu.PV -= dmg_dealt;
+                }
+                else{
+                    printf("%s miss ! No damage was dealt\n", user.name);
+                }
+                
                 if (cpu.PV > 0){
                     printf("%s has %d PV left\n", cpu.name, cpu.PV);
                     turn = 2;
@@ -114,9 +135,16 @@ void fight(FIGHTER user, FIGHTER cpu, int turn){
             printf("\t[CPU turn !]\n");
             input = rand()%nb_attacks;
             printf("%s use %s !\n", cpu.name, cpu.skill_name[input]);
-            dmg_dealt = damage_formula(cpu, user, input);
-            printf("%s inflicts %d damage\n", cpu.name, dmg_dealt);
-            user.PV -= dmg_dealt;
+            hit = accuracy_formula(cpu, input);
+            if(hit == 1){
+                dmg_dealt = damage_formula(cpu, user, input);
+                printf("%s inflicts %d damage\n", cpu.name, dmg_dealt);
+                user.PV -= dmg_dealt;
+            }
+            else{
+                printf("%s miss ! No damage was dealt\n", cpu.name);
+            }
+
             if (user.PV > 0){
                 printf("%s has %d PV left\n", user.name, user.PV);
                 turn = 1;

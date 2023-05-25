@@ -22,14 +22,17 @@ utiliser pour les scanf
 #include <math.h>
 #include "rpg.h"
 
-#define nb_fighter 2
+#define nb_fighter 5
 
 int main(void){
 
     //Roster[2];
     FIGHTER f[nb_fighter] = {
-        {"Maxime", 30, 8, 2, 6, 4, {1, 2}, {"punch", "Burlp"}, {'P', 'M'}, {5, 5} },
-        {"Walid", 30, 3, 4, 7, 6, {1, 2}, {"punch", "kick"}, {'P', 'M'}, {4, 6}}
+        {"Maxime", 30, 8, 2, 6, 4, {"Bite the Dust", "Burlp"}, {'P', 'M'}, {5, 5}, {80, 80} },
+        {"Walid", 30, 3, 4, 7, 6, {"Throw a Bag", "Hack ur Switch !"}, {'P', 'M'}, {8, 7}, {80, 75}},
+        {"Raphael", 30, 8, 5, 3, 4, {"Stiking Pose", "High Jump kick"}, {'P', 'P'}, {3, 7}, {90, 60}},
+        {"Adrian", 30, 10, 4, 3, 3, {"Swearing", "RUN OVER YOU"}, {'M', 'P'}, {7, 15}, {100, 50}},
+        {"GOD Adrian", 30, 10, 10, 10, 10, {"S#!7 0n u", "GAS GAS GAS"}, {'M', 'P'}, {5, 5}, {100, 100}}
     };
     //Roster[]
     //FIGHTER f3 = {"Adrian", 10, 10, 0, 0};
