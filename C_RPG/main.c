@@ -20,12 +20,14 @@ utiliser pour les scanf
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
+#include <time.h>
 #include "rpg.h"
 
 #define nb_fighter 5
 
 int main(void){
 
+    srand ( time(NULL) );
     //Roster[2];
     FIGHTER f[nb_fighter] = {
         {"Maxime", 30, 8, 2, 6, 4, {"Bite the Dust", "Burlp"}, {'P', 'M'}, {5, 5}, {80, 80} },

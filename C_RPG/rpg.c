@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
+
 #include "rpg.h"
 
 #define nb_attacks 2
@@ -156,9 +157,9 @@ void fight(FIGHTER user, FIGHTER cpu, int turn){
         }
     }
     if (ko == 1){
-        printf("Player wins !\n");
+        printf("\nPlayer wins !\n");
     }
     else if (ko == 2){
-        printf("CPU wins !\n");
+        printf("\nCPU wins !\n");
     }
 }
